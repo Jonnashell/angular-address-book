@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Contact } from '../models/contact';
 import { ContactsService } from '../contacts.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add',
@@ -14,7 +15,8 @@ export class AddComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private readonly contactsService: ContactsService
+    private readonly contactsService: ContactsService,
+    private router: Router
   ) {
     this.contactForm = this.formBuilder.group({
       firstName: ['', Validators.required],
@@ -35,5 +37,6 @@ export class AddComponent {
     };
     this.cservice.AddContact(newContact);
     this.contactForm.reset();
+    this.router.navigate(['/contacts'])
   }
 }
